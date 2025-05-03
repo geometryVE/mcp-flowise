@@ -11,14 +11,14 @@ WORKDIR /app
 COPY . .
 
 # Install dependencies
-RUN uvx sync --frozen --no-dev --no-editable
+RUN uv pip install --system .
 
 # Expose the port the app runs on
 EXPOSE 8000
 
 # Set environment variables required for running the MCP server
-ENV FLOWISE_API_KEY=your_api_key
+ENV FLOWISE_API_KEY=
 ENV FLOWISE_API_ENDPOINT=http://localhost:3000
 
 # Define the command to run the app
-CMD ["uvx", "--from", "git+https://github.com/matthewhand/mcp-flowise", "mcp-flowise"]
+CMD ["sh", "-c", "python -m pip install git+https://github.com/geometryVE/mcp-flowise.git && python -m mcp_flowise"]
